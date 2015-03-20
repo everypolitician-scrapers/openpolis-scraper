@@ -2,9 +2,9 @@
 
 # Convert OpenPolis lists to CSV
 
-require 'csv'
+require 'scraperwiki'
 require 'nokogiri'
-require 'open-uri/cached'
+require 'open-uri'
 require 'pry'
 
 sources = { 
@@ -24,10 +24,10 @@ sources.each do |house, url|
       id: info[0].at_css('a')['href'].split('/').last,
       name: info[0].text.strip,
       surname: info[0].at_css('.surname').text.strip,
-      group: info[1].text.strip,
+      party: info[1].text.strip,
       area: info[2].text.strip,
       house: house,
     }
-    puts data
+    ScraperWiki.save_sqlite([:id], data)
   end
 end
