@@ -5,7 +5,6 @@
 require 'scraperwiki'
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
 
 sources = { 
   'Senate' => 'http://politici.openpolis.it/istituzione/senatori/5',
