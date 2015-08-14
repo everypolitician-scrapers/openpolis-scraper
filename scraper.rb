@@ -26,6 +26,8 @@ sources.each do |house, url|
       party: info[1].text.strip,
       area: info[2].text.strip,
       house: house,
+      term: 17,
+      source: url,
     }
     ScraperWiki.save_sqlite([:id], data)
   end
