@@ -16,12 +16,17 @@ sources = {
   'Chamber of Deputies' => 'http://politici.openpolis.it/istituzione/deputati/4',
 }
 
+class String
+  def tidy
+    self.gsub(/[[:space:]]+/, ' ').strip
+  end
+end
+
 def noko_for(url)
   Nokogiri::HTML(open(url).read)
 end
 
 def scrape_person(url)
-  puts url
   noko = noko_for(url)
   data = {
     image: noko.css('img#foto_politico/@src').text,
@@ -40,10 +45,10 @@ sources.each do |house, url|
     link = URI.join(url, tds[0].css('a/@href').text).to_s
     data = { 
       id: link.split('/').last,
-      name: tds[0].text.strip,
-      surname: tds[0].at_css('.surname').text.strip,
-      party: tds[1].text.strip,
-      area: tds[2].text.strip,
+      name: tds[0].text.tidy,
+      surname: tds[0].at_css('.surname').text.tidy,
+      party: tds[1].text.tidy,
+      area: tds[2].text.tidy,
       house: house,
       term: 17,
       source: link,
