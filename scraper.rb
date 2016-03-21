@@ -30,9 +30,9 @@ def scrape_person(url)
   noko = noko_for(url)
   data = {
     image: noko.css('img#foto_politico/@src').text,
-    email: noko.css('div.contacts a[href*="mailto:"]/@href').text.sub('mailto:',''),
-    facebook: noko.css('div.contacts a[href*="facebook"]/@href').text,
-    twitter: noko.css('div.contacts a[href*="twitter"]/@href').text,
+    email: noko.css('div.contacts a[href*="mailto:"]/@href').map { |u| u.value.gsub('mailto:','') }.uniq.join(';'),
+    facebook: noko.css('div.contacts a[href*="facebook"]/@href').map { |u| u.value }.uniq.join(';'),
+    twitter: noko.css('div.contacts a[href*="twitter"]/@href').map { |u| u.value }.uniq.join(';'),
   }
   data[:image] = URI.join(url, URI.escape(data[:image])).to_s unless data[:image].to_s.empty?
   data
