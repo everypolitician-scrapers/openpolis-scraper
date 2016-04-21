@@ -34,6 +34,12 @@ def scrape_person(url)
     facebook: noko.css('div.contacts a[href*="facebook"]/@href').map { |u| u.value }.uniq.join(';'),
     twitter: noko.css('div.contacts a[href*="twitter"]/@href').map { |u| u.value }.uniq.join(';'),
   }
+
+  # TODO: This is a workaround for mailto: links containing YouTube links it
+  # can be removed once they stop appearing on e.g. this page:
+  # http://politici.openpolis.it/politico/franco-vazio/316193.
+  data[:email] = data[:email].split(';').reject { |e| e.start_with?('http') }.join(';')
+
   data[:image] = URI.join(url, URI.escape(data[:image])).to_s unless data[:image].to_s.empty?
   data
 end
