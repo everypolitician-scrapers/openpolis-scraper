@@ -44,6 +44,8 @@ def scrape_person(url)
   data
 end
 
+ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
+
 sources.each do |house, url|
   noko = noko_for(url)
   noko.css('div.genericblock table tr:nth-child(n+3)').each do |tr|
