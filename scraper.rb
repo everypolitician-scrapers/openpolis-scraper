@@ -3,11 +3,10 @@
 
 # Convert OpenPolis lists to CSV
 
-require 'scraperwiki'
-require 'nokogiri'
-require 'open-uri'
-
 require 'pry'
+require 'scraped'
+require 'scraperwiki'
+
 require 'open-uri/cached'
 OpenURI::Cache.cache_path = '.cache'
 
@@ -15,12 +14,6 @@ sources = {
   'Senate'              => 'http://politici.openpolis.it/istituzione/senatori/5',
   'Chamber of Deputies' => 'http://politici.openpolis.it/istituzione/deputati/4',
 }
-
-class String
-  def tidy
-    gsub(/[[:space:]]+/, ' ').strip
-  end
-end
 
 def noko_for(url)
   Nokogiri::HTML(open(url).read)
