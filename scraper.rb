@@ -11,8 +11,8 @@ require 'open-uri/cached'
 OpenURI::Cache.cache_path = '.cache'
 
 sources = {
-  'Senate'              => 'http://politici.openpolis.it/istituzione/senatori/5',
-  'Chamber of Deputies' => 'http://politici.openpolis.it/istituzione/deputati/4',
+  'Senate'              => 'https://politici.openpolis.it/istituzione/senatori/5',
+  'Chamber of Deputies' => 'https://politici.openpolis.it/istituzione/deputati/4',
 }
 
 def noko_for(url)
