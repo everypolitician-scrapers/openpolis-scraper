@@ -51,7 +51,7 @@ sources.each do |house, url|
       party:   tds[1].text.tidy,
       area:    tds[2].text.tidy,
       house:   house,
-      term:    17,
+      term:    18,
       source:  link,
     }.merge(scrape_person(link))
     ScraperWiki.save_sqlite([:id], data)
