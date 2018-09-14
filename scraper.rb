@@ -54,6 +54,7 @@ sources.each do |house, url|
       term:    18,
       source:  link,
     }.merge(scrape_person(link))
+    puts data.reject { |_, v| v.to_s.empty? }.sort_by { |k, _| k }.to_h if ENV['MORPH_DEBUG']
     ScraperWiki.save_sqlite([:id], data)
   end
 end
